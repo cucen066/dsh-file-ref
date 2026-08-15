@@ -3,7 +3,7 @@
 Codex-style **workspace file references** for the [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) web GUI: type `@` in the composer to browse the current workspace's files and insert the file's workspace-relative path as plain text.
 
 ```
-@ → 情景模拟对话主题_男女_男男.md → send
+@ → file.md → send
 ```
 
 The agent receives a clean relative path it can resolve against the session workspace — no absolute paths, no truncated chips.
