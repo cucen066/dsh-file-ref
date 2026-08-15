@@ -1,0 +1,4 @@
+node_modules/
+*.log
+boot-*.log
+.DS_Store
