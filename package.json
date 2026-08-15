@@ -2,6 +2,15 @@
   "name": "dsh-file-ref",
   "version": "0.1.0",
   "description": "Codex-style workspace file references for the DeepSeek Harness web GUI: type @ in the composer to browse workspace files and insert the workspace-relative path.",
+  "author": "cucen066 <2678082536@qq.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cucen066/dsh-file-ref.git"
+  },
+  "homepage": "https://github.com/cucen066/dsh-file-ref",
+  "bugs": {
+    "url": "https://github.com/cucen066/dsh-file-ref/issues"
+  },
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
