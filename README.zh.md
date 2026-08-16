@@ -97,9 +97,6 @@ node smoke-test.mjs /path/to/dir   # 或指定任意绝对目录
 - 只列文件；无目录项、无多级选择器导航。
 - `@` 菜单分组标题显示原始源名（`file-ref`），因为触发菜单的 locale 命名空间归 `ui-input-trigger` 所有。
 
-## 官方生态要求
-DeepSeek 当前建议社区作者把插件放在自己的 GitHub 项目中，并为仓库添加 dsh-plugin topic 方便发现。官方仓库目前不接受 外部 PR，也没有强制社区插件仓库模板。原文见官方 CONTRIBUTING.zh.md。
-
 ## License
 
 MIT
