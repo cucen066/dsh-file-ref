@@ -1,12 +1,12 @@
 # dsh-file-ref
 
-Codex-style **workspace file references** for the [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) web GUI: type `@` in the composer to browse the current workspace's files and insert the file's workspace-relative path as plain text.
+Codex-style **workspace file references** for the [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) web GUI: type `@` in the composer to browse the current workspace's files and insert the file's workspace-relative path as plain text, prefixed with a workspace anchor (`工作区文件：`).
 
 ```
 @ → file.md → send
 ```
 
-The agent receives a clean relative path it can resolve against the session workspace — no absolute paths, no truncated chips.
+The agent receives a relative path anchored to the workspace (`工作区文件：file.md`), so it resolves the file inside the session workspace instead of searching the whole disk by name — no absolute paths, no truncated chips.
 
 ## Why plain text instead of a chip?
 
@@ -14,14 +14,14 @@ DSH's composer reference chips occupy a **single character cell**, so any label 
 
 - the composer shows the **complete file name** before you send;
 - the sent message is **exactly what you picked** (WYSIWYG);
-- the agent gets a short, unambiguous relative path (`sub/file.md` for nested files).
+- the agent gets a short, unambiguous relative path prefixed with a workspace anchor (`工作区文件：sub/file.md` for nested files), which steers it to the workspace instead of a disk-wide search.
 
 ## Features
 
 - `@` opens a file group at the top of the existing trigger menu (before subagents/plugins).
 - Candidates come from a small host endpoint, so the browser never touches the filesystem directly.
 - Files only (directories are skipped), recursive walk up to depth 4, capped at 300 files; `node_modules`, `.git`, and dotfiles are excluded.
-- Workspace-relative path insertion; falls back to the bare file name when the file is outside the workspace root.
+- Anchored workspace-relative insertion (`工作区文件：relative/path`); falls back to the bare file name when the file is outside the workspace root.
 
 ## Requirements
 
@@ -70,7 +70,9 @@ Two halves, one package (a `dsh.client` dual-face plugin):
 - **Browser half** (`lib/client.js`) registers an `@` input-trigger source
   (`file-ref`, order `-1` so it lists first). Candidates call the route with
   the session's `cwd` (from the sessions store). Picking a file inserts the
-  workspace-relative path plus a trailing space.
+  workspace-relative path prefixed with a workspace anchor plus a trailing
+  space — the anchor makes the model resolve the file inside the workspace
+  rather than searching the whole disk by name.
 
 The browser never needs a filesystem API; the host never exposes one beyond
 the single listing route.
